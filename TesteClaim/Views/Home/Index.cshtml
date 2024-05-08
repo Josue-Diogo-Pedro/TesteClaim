@@ -1,0 +1,50 @@
+﻿@using TesteClaim.Controllers
+@model Colaborador
+@{
+    var teste = Model;
+    ViewData["Title"] = "Home Page";
+}
+
+<h3>Permissões do Colaborador</h3>
+
+<form role="form" method="post">
+
+    @* <input asp-for="Id" hidden />
+    <input asp-for="ListPermissions" hidden />
+    <input type="hidden" asp-for="ListUserClaims" />
+    <input asp-for="Nmae" hidden />
+    <input asp-for="Permissions" hidden />
+    <input asp-for="UserClaim" hidden />
+
+    @foreach (var item in Model.ListPermissions)
+    {
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" asp-for="ListPermissions.Values">@item.Value</label>
+        </div>
+    } *@
+
+
+    <div class="row">
+        @foreach (var item in Model.ListPermissions)
+        {
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="@($"chk_{item.Key}")" name="ListPermissions[@item.Key]" value="true" @(item.Value ? "checked" : "") />
+                <label class="form-check-label" for="@($"chk_{item.Key}")">@item.Key</label>
+            </div>
+        }
+    </div>
+
+    <hr/>
+
+    @foreach (var item in Model.ListUserClaims)
+    {
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="@($"chk_{item.Key}")" name="ListUserClaims[@item.Key]" checked="@item.Value" />
+            <label class="form-check-label" for="@($"chk_{item.Key}")">@item.Key</label>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+
+</form>
